@@ -4,11 +4,14 @@ version = "0.1.0"
 description = ""
 authors = ["Ron Southwick <ronlsouthwick@gmail.com>"]
 readme = "README.md"
-packages = [{include = "what_todo_python"}]
+packages = [{include = "todo"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+typer = "^0.7.0"
 
+[tool.poetry.group.test.dependencies]
+pytest = "^7.2.1"
 
 [build-system]
 requires = ["poetry-core"]
