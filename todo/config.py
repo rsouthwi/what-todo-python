@@ -1,4 +1,4 @@
-from pathlib import Path
+from pathlib import Path, PosixPath
 
 from todo import SUCCESS, DIR_ERROR, FILE_ERROR, DB_WRITE_ERROR
 
@@ -15,8 +15,10 @@ def init_app(user_db: str) -> int:
     config_code = _init_db_file()
     if config_code != SUCCESS:
         return config_code
-    database_code = _create_database(user_db)
-    return database_code
+    db_file = DATA_LOCATION / f"{user_db}.json"
+    if not db_file.exists():
+        return _create_database(db_file)
+    return SUCCESS
 
 
 def _init_db_file() -> int:
@@ -31,8 +33,7 @@ def _init_db_file() -> int:
     return SUCCESS
 
 
-def _create_database(user_db: str) -> int:
-    db_file = DATA_LOCATION / f"{user_db}.json"
+def _create_database(db_file: Path) -> int:
     try:
         with db_file.open("w") as file:
             file.write("{}")
