@@ -14,7 +14,17 @@ how to process commands?
 """
 import os
 
-import controller
+from database import get_all_user_dbs
+
+
+def clear_screen():
+    os.system("clear")
+
+
+def quit_ToDo():
+    clear_screen()
+    print("Thank you.")
+    exit()
 
 
 class BaseView:
@@ -25,19 +35,33 @@ class BaseView:
         self.populate_commands()
 
     def populate_commands(self) -> None:
-        self.commands["q"] = controller.quit_ToDo
+        self.commands["q"] = quit_ToDo
 
     @staticmethod
     def clear_screen() -> None:
-        controller.clear_screen()
+        clear_screen()
+
+    def display_commands(self) -> None:
+        print("\nCommands:")
+        for key, command in self.commands.items():
+            print(f"\t[{key}] {command}")
+        print("________________________")
 
 
 class UserView(BaseView):
     context = "user"
 
     def populate_commands(self) -> None:
-        super().populate_commands()
         self.commands["1"] = "create user"
+        self.commands["2"] = "set user"
+        self.commands["3"] = "delete user"
+        super().populate_commands()
+
+    def display_users(self) -> None:
+        users = get_all_user_dbs()
+        print("getting users")
+        for idx, user in enumerate(users):
+            print(f"[{idx}] - {user}")
 
 
 class ToDoListView(BaseView):

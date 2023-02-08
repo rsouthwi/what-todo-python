@@ -1,9 +1,7 @@
 import os
 from time import sleep
 
-
-def clear_screen():
-    os.system("clear")
+from views import UserView, clear_screen, quit_ToDo
 
 
 def display_title_bar():
@@ -24,19 +22,15 @@ def get_user_choice():
     return input("\nPlease enter a command: ")
 
 
-def quit_ToDo():
-    clear_screen()
-    print("Thank you.")
-    exit()
-
-
 def start_app():
     clear_screen()
+    UserView().display_users()
     # get user_name first
     # get or create db from user_name
     # load data from json file into memory
     while True:
-        choice = get_user_choice()
+        UserView().display_commands()
+        choice = input("\nPlease enter a command: ")
         if choice.lower() == "q":
             quit_ToDo()
 
