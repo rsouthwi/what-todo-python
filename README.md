@@ -1,5 +1,5 @@
 # what-todo-python
-This is a ToDo app written in Python.  This will likely be a command-line based interface as I've already completed a ToDo app [as a web application](../what-todo-django). 
+This is a ToDo app written in Python.  This will likely be a command-line based interface as I've already completed a ToDo app [as a web application](../../what-todo-django). 
 
 ### With this project I'd like to:
 
